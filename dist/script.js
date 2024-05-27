@@ -26,7 +26,7 @@ let startTime;
 let lastDirection = 'up';
 let playerImage = new Image();
 let enemyImages = [];
-let isMusicPlaying = false;
+let isMusicPlaying = true;
 
 async function fetchPokemonImages() {
     try {
@@ -79,11 +79,9 @@ function initGame() {
     document.addEventListener('keydown', keyDownHandler);
     document.addEventListener('keyup', keyUpHandler);
 
-    // Ensure background music is stopped and button text is set correctly
-    backgroundMusic.pause();
-    backgroundMusic.currentTime = 0;
-    isMusicPlaying = false;
-    musicToggleButton.innerText = 'Music: Off';
+    backgroundMusic.play();
+    isMusicPlaying = true;
+    musicToggleButton.innerText = 'Music: On';
 
     gameLoopId = requestAnimationFrame(gameLoop);
     enemySpawnInterval = setInterval(spawnEnemy, 1000);
@@ -280,6 +278,7 @@ function toggleMusic() {
         musicToggleButton.innerText = 'Music: On';
     }
     isMusicPlaying = !isMusicPlaying;
+    canvas.focus(); // Remove focus from the button
 }
 
 fetchPokemonImages().then(initGame);
