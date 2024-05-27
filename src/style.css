@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('https://cdn.pixabay.com/photo/2016/08/27/11/59/pokemon-1624022_960_720.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+#gameCanvas {
+    border: 1px solid #fff;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#score {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}
+
+#energy {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}
+
+#timer {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}
+
+#restartButton {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    font-size: 20px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    cursor: pointer;
+}
+
+#restartButton:hover {
+    background-color: #0056b3;
+}
