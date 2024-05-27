@@ -1,9 +1,11 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const restartButton = document.getElementById('restartButton');
+const musicToggleButton = document.getElementById('musicToggleButton');
 const backgroundMusic = document.getElementById('backgroundMusic');
 const crashSound = document.getElementById('crashSound');
 const gameOverSound = document.getElementById('gameOverSound');
+const attackSound = document.getElementById('attackSound');
 let scoreDisplay = document.getElementById('score');
 let energyDisplay = document.getElementById('energy');
 let timerDisplay = document.getElementById('timer');
@@ -24,6 +26,7 @@ let startTime;
 let lastDirection = 'up';
 let playerImage = new Image();
 let enemyImages = [];
+let isMusicPlaying = true;
 
 async function fetchPokemonImages() {
     try {
@@ -77,6 +80,8 @@ function initGame() {
     document.addEventListener('keyup', keyUpHandler);
 
     backgroundMusic.play();
+    isMusicPlaying = true;
+    musicToggleButton.innerText = 'Music: On';
 
     gameLoopId = requestAnimationFrame(gameLoop);
     enemySpawnInterval = setInterval(spawnEnemy, 1000);
@@ -195,6 +200,7 @@ function update() {
                 enemies.splice(enemyIndex, 1);
                 score += 10;
                 scoreDisplay.innerText = `Score: ${score}`;
+                attackSound.play();
             }
         });
 
@@ -222,7 +228,7 @@ function draw() {
     ctx.drawImage(playerImage, player.x, player.y, player.width, player.height);
 
     player.bullets.forEach(bullet => {
-        ctx.fillStyle = 'yellow';
+        ctx.fillStyle = 'red';
         ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
     });
 
@@ -259,8 +265,3 @@ function endGame() {
 }
 
 function restartGame() {
-    restartButton.style.display = 'none';
-    initGame();
-}
-
-fetchPokemonImages().then(initGame);

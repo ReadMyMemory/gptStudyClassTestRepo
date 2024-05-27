@@ -42,12 +42,8 @@ body {
     font-family: Arial, sans-serif;
 }
 
-#restartButton {
-    display: none;
+#restartButton, #musicToggleButton {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     padding: 10px 20px;
     font-size: 20px;
     color: white;
@@ -56,6 +52,18 @@ body {
     cursor: pointer;
 }
 
-#restartButton:hover {
+#restartButton {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+#restartButton:hover, #musicToggleButton:hover {
     background-color: #0056b3;
+}
+
+#musicToggleButton {
+    bottom: 10px;
+    right: 10px;
 }
