@@ -265,3 +265,19 @@ function endGame() {
 }
 
 function restartGame() {
+    restartButton.style.display = 'none';
+    initGame();
+}
+
+function toggleMusic() {
+    if (isMusicPlaying) {
+        backgroundMusic.pause();
+        musicToggleButton.innerText = 'Music: Off';
+    } else {
+        backgroundMusic.play();
+        musicToggleButton.innerText = 'Music: On';
+    }
+    isMusicPlaying = !isMusicPlaying;
+}
+
+fetchPokemonImages().then(initGame);
