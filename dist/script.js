@@ -26,7 +26,7 @@ let startTime;
 let lastDirection = 'up';
 let playerImage = new Image();
 let enemyImages = [];
-let isMusicPlaying = true;
+let isMusicPlaying = false;
 
 async function fetchPokemonImages() {
     try {
@@ -79,9 +79,11 @@ function initGame() {
     document.addEventListener('keydown', keyDownHandler);
     document.addEventListener('keyup', keyUpHandler);
 
-    backgroundMusic.play();
-    isMusicPlaying = true;
-    musicToggleButton.innerText = 'Music: On';
+    // Ensure background music is stopped and button text is set correctly
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0;
+    isMusicPlaying = false;
+    musicToggleButton.innerText = 'Music: Off';
 
     gameLoopId = requestAnimationFrame(gameLoop);
     enemySpawnInterval = setInterval(spawnEnemy, 1000);
@@ -200,7 +202,7 @@ function update() {
                 enemies.splice(enemyIndex, 1);
                 score += 10;
                 scoreDisplay.innerText = `Score: ${score}`;
-                attackSound.play();
+                attackSound.play().catch(error => console.log(error));
             }
         });
 
@@ -211,11 +213,11 @@ function update() {
             player.y + player.height > enemy.y
         ) {
             energy -= 1;
-            crashSound.play();
+            crashSound.play().catch(error => console.log(error));
             energyDisplay.innerText = `Energy: ${energy}`;
             enemies.splice(enemyIndex, 1);
             if (energy <= 0) {
-                gameOverSound.play();
+                gameOverSound.play().catch(error => console.log(error));
                 endGame();
             }
         }
